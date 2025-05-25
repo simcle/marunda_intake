@@ -3,7 +3,7 @@ import ModbusRTU from "modbus-serial";
 const client = new ModbusRTU()
 
 const startPooling = async () => {
-    await client.connectRTUBuffered('', {baudRate: 9600})
+    client.connectTCP('192.168.1.2', {baudRate: 9600})
     client.setID(1)
 
     setInterval(() => {
