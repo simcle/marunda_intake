@@ -9,7 +9,7 @@ const BAUD_RATE = 9600;
 const SLAVE_ID = 1;
 const POLLING_INTERVAL_MS = 1000;
 const RECONNECT_DELAY_MS = 3000;
-
+const FLOW_MAX = 100
 
 let isConnected = false;
 
@@ -37,7 +37,7 @@ const pollData = async () => {
         const data = await client.readHoldingRegisters(0, 1);
         const val = data.data
         const currMa = adcToMilliamp(val)
-        const flow = milliampToFlow(currMa, 100)
+        const flow = milliampToFlow(currMa)
         eventBus.emit('flowrate', flow)
     } catch (err) {
         console.error("⚠️ Read error:", err.message);
@@ -67,10 +67,10 @@ function adcToMilliamp(adcValue) {
 }
 
 // Konversi mA ke flow rate (contoh: 4 mA = 0, 20 mA = 100 m³/h)
-function milliampToFlow(mA, flowMax = 100) {
+function milliampToFlow(mA) {
     if (mA < 4) return 0;
     if (mA > 20) mA = 20;
-    return ((mA - 4) / 16) * flowMax; // linear scale
+    return ((mA - 4) / 16) * FLOW_MAX; // linear scale
 }
 
 export default startPooling
