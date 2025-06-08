@@ -32,7 +32,6 @@ const connectClient = async () => {
 
 const pollData = async () => {
     if (!isConnected) return;
-
     try {
         const data = await client.readHoldingRegisters(0, 1);
         const val = data.data
@@ -52,9 +51,8 @@ const pollData = async () => {
 };
 
 // Main loop
-const startPooling = async () => {
+const startPoolingflow = async () => {
     await connectClient();
-
     setInterval(async () => {
         await pollData();
     }, POLLING_INTERVAL_MS);
@@ -73,4 +71,4 @@ function milliampToFlow(mA) {
     return ((mA - 4) / 16) * FLOW_MAX; // linear scale
 }
 
-export default startPooling
+export default startPoolingflow
