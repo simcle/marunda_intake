@@ -1,19 +1,10 @@
-import ModbusRTU from "modbus-serial";
+import startPooling from "./flow.js";
+import eventBus from "./event.js";
 
-const client = new ModbusRTU()
 
-const startPooling = async () => {
-    client.connectRTUBuffered('/dev/ttyS2', {baudRate: 9600})
-    client.setID(1)
-
-    setInterval(() => {
-        client.readHoldingRegisters(0, 10, (err, data) => {
-            console.log(err)
-            console.log(data)
-        })
-    }, 1000)
-    
-}
+eventBus.on('flowmeter', (data) => {
+    console.log('ini data darai event flow', data)
+})
 
 
 startPooling()
