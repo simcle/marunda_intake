@@ -24,7 +24,7 @@ const connectClient = async () => {
 const pollData = async () => {
     if(!isConnected) return
     try {
-        const data = await client.readDiscreteInputs(0, 4)
+        const data = await client.readHoldingRegisters(0, 10)
         console.log(data)
     } catch (error) {
         console.error("⚠️ Read error:", err.message);
