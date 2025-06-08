@@ -2,8 +2,8 @@ import ModbusRTU from "modbus-serial";
 import eventBus from "./event.js";
 
 const client = new ModbusRTU()
-const ADVANTECT_IP = '192.168.1.2'
-const ADVANTECT_PORT = 502
+const ADVANTECH_IP = '192.168.1.2'
+const ADVANTECH_PORT = 502
 const POLLING_INTERVAL_MS = 1000
 const RECONNECT_DELAY_MS = 3000;
 
@@ -11,20 +11,20 @@ let isConnected = false
 
 const connectClient = async () => {
     try {
-        await client.connectTCP(ADVANTECT_IP, {port: ADVANTECT_PORT})
+        await client.connectTCP(ADVANTECH_IP, {port: ADVANTECH_PORT})
         client.setID(1)
         isConnected = true
-        console.log('ADVANTECT is Connected')
+        console.log('ADVANTECH is Connected')
     } catch (error) {
         isConnected = false
-        console.log('ADVANTECT error connection')
+        console.log('ADVANTECH error connection')
     }
 }
 
 const pollData = async () => {
     if(!isConnected) return
     try {
-        const data = await client.readHoldingRegisters(0, 10)
+        const data = await client.readDiscreteInputs(0, 4)
         console.log(data)
     } catch (error) {
         console.error("⚠️ Read error:", err.message);
