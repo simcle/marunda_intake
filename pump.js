@@ -1,5 +1,5 @@
 import ModbusRTU from "modbus-serial";
-import eventBus from "./event";
+import eventBus from "./event.js";
 
 const client = new ModbusRTU()
 const ADVANTECT_IP = '192.168.1.2'
