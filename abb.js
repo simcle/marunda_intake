@@ -10,7 +10,7 @@ const connectClient = async () => {
     setInterval(async () => {
         console.log('send request')
         try {
-            const data = await client.readHoldingRegisters(0, 10)
+            const data = await client.readHoldingRegisters(1, 2)
             console.log('response')
             console.log(data) 
         } catch (error) {
