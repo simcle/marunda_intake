@@ -13,6 +13,7 @@
   "description": "",
   "dependencies": {
     "modbus-serial": "^8.0.21-no-serial-port",
+    "mqtt": "^5.13.1",
     "serialport": "^13.0.0"
   },
   "devDependencies": {
