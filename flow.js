@@ -38,7 +38,7 @@ const pollData = async () => {
         console.log(val)
         const currMa = adcToMilliamp(val)
         const flow = milliampToFlow(currMa)
-        eventBus.emit('flowrate', flow)
+        // eventBus.emit('flowrate', flow)
     } catch (err) {
         console.error("⚠️ Read error:", err.message);
         isConnected = false;
