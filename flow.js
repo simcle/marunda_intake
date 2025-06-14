@@ -9,7 +9,7 @@ const BAUD_RATE = 9600;
 const SLAVE_ID = 1;
 const POLLING_INTERVAL_MS = 1000;
 const RECONNECT_DELAY_MS = 3000;
-const FLOW_MAX = 200
+const FLOW_MAX = 67
 
 let isConnected = false;
 
@@ -62,12 +62,8 @@ const startPoolingflow = async () => {
 
 
 // Konversi ADC 16-bit ke mA dan flow rate
-const ADC_MIN = 31200; // ADC value at 4 mA (dari hasil pengukuran)
-const ADC_MAX = 62400; // ADC value at 20 mA
-
 function adcToMilliamp(adcValue) {
-    const clamped = Math.max(ADC_MIN, Math.min(adcValue, ADC_MAX));
-    return ((clamped - ADC_MIN) / (ADC_MAX - ADC_MIN)) * 16 + 4;
+    return (adcValue / 65535) * 16 + 4; // 4–20 mA range
 }
 
 // Konversi mA ke flow rate (contoh: 4 mA = 0, 20 mA = 100 m³/h)
