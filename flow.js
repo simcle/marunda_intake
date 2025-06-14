@@ -37,8 +37,9 @@ const pollData = async () => {
         const val = data.data
         console.log(val)
         const currMa = adcToMilliamp(val)
+        console.log('ma', currMa)
         const flow = milliampToFlow(currMa)
-        // eventBus.emit('flowrate', flow)
+        eventBus.emit('flowrate', flow)
     } catch (err) {
         console.error("⚠️ Read error:", err.message);
         isConnected = false;
@@ -61,8 +62,12 @@ const startPoolingflow = async () => {
 
 
 // Konversi ADC 16-bit ke mA dan flow rate
+const ADC_MIN = 31200; // ADC value at 4 mA (dari hasil pengukuran)
+const ADC_MAX = 62400; // ADC value at 20 mA
+
 function adcToMilliamp(adcValue) {
-    return (adcValue / 65535) * 16 + 4; // 4–20 mA range
+    const clamped = Math.max(ADC_MIN, Math.min(adcValue, ADC_MAX));
+    return ((clamped - ADC_MIN) / (ADC_MAX - ADC_MIN)) * 16 + 4;
 }
 
 // Konversi mA ke flow rate (contoh: 4 mA = 0, 20 mA = 100 m³/h)
