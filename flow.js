@@ -63,7 +63,8 @@ const startPoolingflow = async () => {
 
 // Konversi ADC 16-bit ke mA dan flow rate
 function adcToMilliamp(adcValue) {
-    return (adcValue / 65535) * 16 + 4; // 4–20 mA range
+    const flow = (adcValue / 65535) * 16 + 4; // 4–20 mA range
+    return flow.toFixed(2)
 }
 
 // Konversi mA ke flow rate (contoh: 4 mA = 0, 20 mA = 100 m³/h)
