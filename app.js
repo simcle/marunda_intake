@@ -30,9 +30,9 @@ const data = {
 }
 
 // flowrate
-eventBus.on('flowrate', (data) => {
-    console.log('ini data darai event flow', data)
-    data.flowrate = data
+eventBus.on('flowrate', (val) => {
+    console.log('ini data darai event flow', val)
+    data.flowrate = val
 })
 
 setInterval(() => {
