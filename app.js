@@ -37,7 +37,7 @@ eventBus.on('flowrate', (val) => {
 
 setInterval(() => {
     mqttClient.publish('marunda/intake', JSON.stringify(data))
-})
+}, 1000)
 
 startPoolingPump()
 startPoolingflow()
