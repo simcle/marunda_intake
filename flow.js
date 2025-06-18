@@ -61,7 +61,7 @@ const startPoolingflow = async () => {
 };
 
 const adcMin = 30000;
-const adcMax = 32950;
+const adcMax = 32350;
 
 // Konversi ADC 16-bit ke mA dan flow rate
 function adcToMilliamp(adcValue) {
