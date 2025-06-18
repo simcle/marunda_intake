@@ -1,6 +1,6 @@
-let adcRaw = 31198;
+let adcRaw = 31252;
 const adcMin = 30000;
-const adcMax = 32350;
+const adcMax = 32500;
 
 
 
