@@ -5,7 +5,7 @@ const client = new ModbusRTU()
 
 const connect = async () => {
     try {
-        await client.connectRTUBuffered('/dev/ttyS0', {baudRate: 19200})
+        await client.connectRTUBuffered('/dev/ttyS1', {baudRate: 19200})
         client.setID(1)
         client.setTimeout(1000)
         
