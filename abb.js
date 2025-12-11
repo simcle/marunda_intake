@@ -28,7 +28,7 @@ async function readRegisters() {
         // const res = await client.readHoldingRegisters(0, 9);  
         const res = await client.readHoldingRegisters(20201, 2)
         // mulai dari reg 0, length 4
-        console.log("Data:", res.data);
+        console.log("Data:", res.buffer.swap16().readInt32BE(0));
 
     } catch (err) {
         console.error("❌ Read error:", err.message);
