@@ -7,7 +7,7 @@ const client = new ModbusRTU();
 async function connect() {
     try {
         await client.connectRTUBuffered("/dev/ttyACM0", {
-            baudRate: 9600,
+            baudRate: 19200,
             dataBits: 8,
             stopBits: 1,
             parity: "none",
