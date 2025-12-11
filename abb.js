@@ -25,7 +25,7 @@ async function connect() {
 
 async function readRegisters() {
     try {
-        const res = await client.readHoldingRegisters(0, 6);  
+        const res = await client.readHoldingRegisters(110, 2);  
         // mulai dari reg 0, length 4
         console.log("Data:", res.data);
 
