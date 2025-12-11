@@ -12,7 +12,9 @@ await connectRtu()
 const vector = {
     getHoldingRegister: async function(addr, unitID, callback) {
         // Asynchronous handling (with callback)
+        console.log(addr)
         const res = await rtu.readHoldingRegisters(addr, 1)
+        console.log(res.data)
         callback(null, res.data[0])
     },
 }
