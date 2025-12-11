@@ -6,7 +6,7 @@ const client = new ModbusRTU();
 
 async function connect() {
     try {
-        await client.connectRTUBuffered("/dev/ttyS3", {
+        await client.connectRTUBuffered("/dev/ttyS1", {
             baudRate: 19200,
             dataBits: 8,
             stopBits: 1,
