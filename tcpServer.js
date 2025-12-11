@@ -22,6 +22,7 @@ const serverTCP = new ModbusRTU.ServerTCP({
 serverTCP.on("readHoldingRegisters", async (addr, length, cb) => {
     try {
         const res = await rtu.readHoldingRegisters(addr, length);
+        console.log(res)
         cb(null, res.data);
     } catch (err) {
         console.log("RTU error:", err.message);
