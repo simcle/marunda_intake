@@ -10,7 +10,7 @@ async function connect() {
             baudRate: 19200,
             dataBits: 8,
             stopBits: 1,
-            parity: "none",
+            parity: "even",
         });
 
         client.setID(1);       // Ganti sesuai slave ID
