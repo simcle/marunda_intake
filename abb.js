@@ -1,33 +1,52 @@
 import ModbusRTU from "modbus-serial";
 
-console.log('hallo')
-const client = new ModbusRTU()
+console.log('Starting Modbus RTU test...');
 
-const connect = async () => {
+const client = new ModbusRTU();
+
+async function connect() {
     try {
-        await client.connectRTUBuffered('/dev/ttyS1', {baudRate: 19200})
-        client.setID(1)
-        client.setTimeout(1000)
-        
-    } catch (error) {
-        console.log('error connection', error)
+        await client.connectRTUBuffered("/dev/ttyS1", {
+            baudRate: 19200,
+            dataBits: 8,
+            stopBits: 1,
+            parity: "none",
+        });
+
+        client.setID(1);       // Ganti sesuai slave ID
+        client.setTimeout(1000);
+
+        console.log("Connected to /dev/ttyS1");
+
+    } catch (err) {
+        console.error("❌ Error connecting:", err.message);
     }
 }
 
-const readRegisters = async () => {
+async function readRegisters() {
     try {
-        const res = await client.readHoldingRegisters(1, 4)
-        console.log(res)
-    } catch (error) {
-        console.log('Read Error', error)
+        const res = await client.readHoldingRegisters(0, 4);  
+        // mulai dari reg 0, length 4
+        console.log("Data:", res.data);
+
+    } catch (err) {
+        console.error("❌ Read error:", err.message);
     }
 }
 
-const run = async () => {
-    await connect()
+async function run() {
+    await connect();
+
+    // Tambahkan delay setelah connect
+    await new Promise(resolve => setTimeout(resolve, 300));
+
     setInterval(async () => {
-        await readRegisters()
-    }, 1000)
+        if (client.isOpen) {
+            await readRegisters();
+        } else {
+            console.log("⚠ Port not open");
+        }
+    }, 1000);
 }
 
-run()
+run();
