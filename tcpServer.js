@@ -37,6 +37,7 @@ const tcpServer = new Modbus.server.TCP(server, {
 // ==========================
 tcpServer.on("readHoldingRegisters", async (request, reply) => {
     try {
+        console.log('hallo')
         const addr = request.address;
         const len  = request.quantity;
         console.log(addr, len)
