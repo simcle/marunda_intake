@@ -6,8 +6,8 @@ const client = new ModbusRTU();
 
 async function connect() {
     try {
-        await client.connectRTUBuffered("/dev/ttyS3", {
-            baudRate: 9600,
+        await client.connectRTUBuffered("/dev/ttyS2", {
+            baudRate: 19200,
             dataBits: 8,
             stopBits: 1,
             parity: "none",
@@ -25,7 +25,7 @@ async function connect() {
 
 async function readRegisters() {
     try {
-        const res = await client.readHoldingRegisters(0, 1);  
+        const res = await client.readHoldingRegisters(0, 5);  
         // mulai dari reg 0, length 4
         console.log("Data:", res.data);
 
