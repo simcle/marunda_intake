@@ -39,9 +39,9 @@ tcpServer.on("readHoldingRegisters", async (request, reply) => {
     try {
         const addr = request.address;
         const len  = request.quantity;
+        console.log(addr, len)
 
         const res = await rtu.readHoldingRegisters(addr, len);
-        console.log(res)
         reply(res.data);   // kirim balik ke TCP client
     } catch (err) {
         console.log("RTU read error:", err.message);
