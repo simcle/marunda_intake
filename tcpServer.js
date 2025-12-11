@@ -12,6 +12,7 @@ await connectRtu()
 const vector = {
     getHoldingRegister: function(addr, unitID, callback) {
         // Asynchronous handling (with callback)
+        console.log(addr)
         setTimeout(function() {
             // callback = function(err, value)
             callback(null, addr + 8000);
