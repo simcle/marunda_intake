@@ -26,7 +26,7 @@ async function connect() {
 async function readRegisters() {
     try {
         // const res = await client.readHoldingRegisters(0, 9);  
-        const res = await client.readHoldingRegisters(20211, 2)
+        const res = await client.readHoldingRegisters(20213, 2)
         // mulai dari reg 0, length 4
         console.log("Data:", res.buffer.swap16().readInt32LE(0));
 
