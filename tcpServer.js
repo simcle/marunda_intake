@@ -13,7 +13,6 @@ const vector = {
     getHoldingRegister: async function(addr, unitID, callback) {
         // Asynchronous handling (with callback)
         const res = await rtu.readHoldingRegisters(addr, 1)
-        console.log(res)
         callback(null, res.data[0])
     },
 }
