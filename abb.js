@@ -15,8 +15,12 @@ const connect = async () => {
 }
 
 const readRegisters = async () => {
-    const res = await client.readHoldingRegisters(1, 4)
-    console.log(res)
+    try {
+        const res = await client.readHoldingRegisters(1, 4)
+        console.log(res)
+    } catch (error) {
+        console.log('Read Error', error)
+    }
 }
 
 const run = async () => {
