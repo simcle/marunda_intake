@@ -9,26 +9,19 @@ const connectRtu = async () => {
 
 await connectRtu()
 
-const serverTCP = new ModbusRTU.ServerTCP({
-    holding: Buffer.alloc(200), // tidak digunakan (gateway), tapi wajib ada
-    input: Buffer.alloc(200)
-}, {
-    host: "0.0.0.0",
-    port: 5020,
-    debug: true,
-    unitID: 1,
+const vector = {
+    getHoldingRegister: function(addr, unitID, callback) {
+        // Asynchronous handling (with callback)
+        setTimeout(function() {
+            // callback = function(err, value)
+            callback(null, addr + 8000);
+        }, 10);
+    },
+}
+
+const serverTCP = new ModbusRTU.ServerTCP(vector, { host: "0.0.0.0", port: 8502, debug: true, unitID: 1 });
+serverTCP.on("socketError", function(err){
+    // Handle socket error if needed, can be ignored
+    console.error(err);
 });
-
-serverTCP.on("readHoldingRegisters", async (addr, length, cb) => {
-    try {
-        const res = await rtu.readHoldingRegisters(addr, length);
-        console.log(res)
-        cb(null, res.data);
-    } catch (err) {
-        console.log("RTU error:", err.message);
-        cb(err);
-    }
-});
-
-
 console.log("Modbus TCP Gateway running on port 5020");
