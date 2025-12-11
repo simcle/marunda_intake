@@ -4,7 +4,7 @@ import eventBus from "./event.js";
 const client = new ModbusRTU()
 
 
-const SERIAL_PORT = '/dev/ttyS2';
+const SERIAL_PORT = '/dev/ttyS3';
 const BAUD_RATE = 9600;
 const SLAVE_ID = 1;
 const POLLING_INTERVAL_MS = 1000;
