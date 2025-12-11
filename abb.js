@@ -16,7 +16,7 @@ async function connect() {
         client.setID(1);       // Ganti sesuai slave ID
         client.setTimeout(1000);
 
-        console.log("Connected to /dev/ttyS1");
+        console.log("Connected to /dev/ttyS2");
 
     } catch (err) {
         console.error("❌ Error connecting:", err.message);
@@ -25,7 +25,7 @@ async function connect() {
 
 async function readRegisters() {
     try {
-        const res = await client.readHoldingRegisters(0, 9);  
+        const res = await client.readHoldingRegisters(0, 1);  
         // mulai dari reg 0, length 4
         console.log("Data:", res.data);
         console.log('DATA Voltage: ', res.data[2] / 10)
