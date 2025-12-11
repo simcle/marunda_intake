@@ -25,7 +25,7 @@ async function connect() {
 
 async function readRegisters() {
     try {
-        const res = await client.readHoldingRegisters(0, 10);  
+        const res = await client.readHoldingRegisters(0, 1);  
         // mulai dari reg 0, length 4
         console.log("Data:", res.data);
         console.log('DATA Voltage: ', res.data[2] / 10)
