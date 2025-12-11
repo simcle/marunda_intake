@@ -13,7 +13,7 @@ async function connect() {
             parity: "none",
         });
 
-        client.setID(1);       // Ganti sesuai slave ID
+        client.setID(2);       // Ganti sesuai slave ID
         client.setTimeout(1000);
 
         console.log("Connected to /dev/ttyS1");
