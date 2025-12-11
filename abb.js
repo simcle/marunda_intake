@@ -1,5 +1,6 @@
 import ModbusRTU from "modbus-serial";
 
+console.log('hallo')
 const client = new ModbusRTU()
 
 
