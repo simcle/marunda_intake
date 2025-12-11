@@ -15,7 +15,10 @@ const vector = {
         console.log(addr)
         const res = await rtu.readHoldingRegisters(addr, 1)
         console.log(res.data)
-        callback(null, res.data[0])
+        setTimeout(function() {
+            // callback = function(err, value)
+            callback(null, res.data[0])
+        }, 10);
     },
 }
 
