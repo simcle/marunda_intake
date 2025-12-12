@@ -1,5 +1,6 @@
 import ModbusRTU from "modbus-serial";
-import { startPolling } from "./acs580";
+import { startPolling } from "./acs580.js";
+
 console.log('Starting Modbus RTU test...');
 
 const client = new ModbusRTU();
