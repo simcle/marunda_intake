@@ -1,7 +1,13 @@
 // ======================================================
-//  ACS580 Parameter Engine - Final Version
-//  Supports: 16-bit & 32-bit Mode 0 addressing
+//  ACS580 Modebus Parameter Engine - Final Version
+//  Supports: 16-bit & 32-bit Mode 0 addressing 
 // ======================================================
+import ModbusRTU from "modbus-serial";
+const client = new ModbusRTU();
+
+let pollingStopper = null;
+let reconnecting = false;
+
 
 // -----------------------
 // LISTING PARAMETER
@@ -113,7 +119,7 @@ const getParamInfo = (param) => {
 // ======================================================
 // UNIVERSAL READ FUNCTION
 // ======================================================
-export async function readParameter(client, param) {
+const readParameter = async (client, param) => {
     const info = getParamInfo(param);
 
     // read registers
@@ -144,7 +150,7 @@ export async function readParameter(client, param) {
 // ======================================================
 // READ ALL PARAMETERS
 // ======================================================
-export async function readAllParameters(client) {
+const readAllParameters = async (client) => {
     const result = [];
 
     for (const param of listing) {
@@ -163,7 +169,7 @@ export async function readAllParameters(client) {
 }
 
 
-export function startPolling(client, intervalMs = 1000, callback = console.log) {
+const startPolling = async (client, intervalMs = 1000, callback = console.log) => {
     let timer = null;
 
     async function loop() {
@@ -187,3 +193,80 @@ export function startPolling(client, intervalMs = 1000, callback = console.log) 
         console.log("Polling stopped");
     };
 }
+
+async function connect() {
+    try {
+        await client.connectRTUBuffered("/dev/ttyS2", {
+            baudRate: 19200,
+            dataBits: 8,
+            stopBits: 1,
+            parity: "none",
+        });
+
+        client.setID(1);
+        client.setTimeout(1000);
+
+        console.log("✅ Connected to /dev/ttyS2");
+        return true;
+
+    } catch (err) {
+        console.error("❌ Connection error:", err.message);
+        return false;
+    }
+}
+
+// =========================
+// AUTO RECONNECT ENGINE
+// =========================
+async function ensureConnected() {
+    if (client.isOpen) return true;
+
+    if (reconnecting) return false;  // cegah reconnect ganda
+    reconnecting = true;
+
+    console.log("🔄 Attempting reconnect...");
+
+    let ok = false;
+
+    for (let i = 0; i < 5; i++) {
+        ok = await connect();
+        if (ok) break;
+
+        console.log(`⏳ Retry ${i + 1} failed, waiting 2s...`);
+        await new Promise(r => setTimeout(r, 2000));
+    }
+
+    reconnecting = false;
+
+    if (!ok) {
+        console.log("❌ Failed reconnecting after 5 attempts");
+    }
+
+    return ok;
+}
+
+// =========================
+// READ LOOP WITH SELF-HEALING
+// =========================
+async function run() {
+    await ensureConnected();
+
+    // Start polling only once
+    if (!pollingStopper) {
+        pollingStopper = startPolling(client, 1000, (data) => {
+            console.log("📊 Data:", data);
+        });
+    }
+
+    // Loop forever to monitor disconnection and auto-reconnect
+    while (true) {
+        if (!client.isOpen) {
+            console.log("⚠️ Connection lost, reconnecting...");
+            await ensureConnected();
+        }
+
+        await new Promise(r => setTimeout(r, 1000));
+    }
+}
+
+run();

@@ -8,8 +8,6 @@ let reconnecting = false;
 
 async function connect() {
     try {
-        console.log("🔌 Connecting to /dev/ttyS2 ...");
-
         await client.connectRTUBuffered("/dev/ttyS2", {
             baudRate: 19200,
             dataBits: 8,
