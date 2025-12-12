@@ -34,7 +34,7 @@ async function connect() {
 // AUTO RECONNECT ENGINE
 // =========================
 async function ensureConnected() {
-    console.log(client.isOpen)
+    console.log('checking client', client.isOpen)
     if (client.isOpen) return true;
 
     if (reconnecting) return false;  // cegah reconnect ganda
