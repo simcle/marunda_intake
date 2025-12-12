@@ -53,17 +53,17 @@ const abbToNodeAddress = (abb) => {
 // -----------------------
 // GENERATE FINAL PARAM INFO
 // -----------------------
-const getRegisterInfo = (param) => {
+const getParamInfo = (param) => {
     const { group, index } = parseNum(param.num)
-    const abb = getAbbRegister(group, index, param.type)
-    const node = abbToNodeAddress(abb)
+    const abbRegister = getAbbRegister(group, index, param.type);
+    const nodeRegister = abbToNodeAddress(abbRegister);
 
     return {
         ...param,
         group: group,
         index: index,
-        abbRegister: abb,
-        nodeRegister: node,
+        abbRegister,
+        nodeRegister,
         words: param.type === '32bit' ? 2 : 1
     }
 }
