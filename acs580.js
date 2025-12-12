@@ -54,14 +54,14 @@ const listing = [
         num: '01.19',
         unit: 'mWh',
         type: '32bit',
-        scale: 100
+        scale: 1
     },
     {
         name: 'kWh counter',
         num: '01.20',
         unit: 'kWh',
         type: '32bit',
-        scale: 100
+        scale: 10
     },
 ]
 
