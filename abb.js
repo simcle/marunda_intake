@@ -76,7 +76,6 @@ async function run() {
 
     // Loop forever to monitor disconnection and auto-reconnect
     while (true) {
-        console.log(client.isOpen)
         if (!client.isOpen) {
             console.log("⚠️ Connection lost, reconnecting...");
             await ensureConnected();

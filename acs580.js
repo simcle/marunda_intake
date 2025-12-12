@@ -8,9 +8,16 @@
 // -----------------------
 const listing = [
     {
-        name: 'DC Volt',
-        num: '01.11',
-        unit: 'V',
+        name: 'Motor Speed Used',
+        num: '01.01',
+        unit: 'rpm',
+        type: '32bit',
+        scale: 100
+    },
+    {
+        name: 'Output Frequency',
+        num: '01.06',
+        unit: 'Hz',
         type: '32bit',
         scale: 100
     },
@@ -20,7 +27,42 @@ const listing = [
         unit: 'A',
         type: '32bit',
         scale: 100
-    }
+    },
+    {
+        name: 'Motor Torque',
+        num: '01.10',
+        unit: '%',
+        type: '32bit',
+        scale: 10
+    },
+    {
+        name: 'DC Volt',
+        num: '01.11',
+        unit: 'V',
+        type: '32bit',
+        scale: 100
+    },
+    {
+        name: 'Motor Power',
+        num: '01.14',
+        unit: 'kW/hp',
+        type: '32bit',
+        scale: 100
+    },
+    {
+        name: 'mWh counter',
+        num: '01.19',
+        unit: 'mWh',
+        type: '32bit',
+        scale: 100
+    },
+    {
+        name: 'kWh counter',
+        num: '01.20',
+        unit: 'kWh',
+        type: '32bit',
+        scale: 100
+    },
 ]
 
 // -----------------------
