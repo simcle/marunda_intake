@@ -1,5 +1,5 @@
 import ModbusRTU from "modbus-serial";
-
+import { startPolling } from "./acs580";
 console.log('Starting Modbus RTU test...');
 
 const client = new ModbusRTU();
@@ -23,31 +23,12 @@ async function connect() {
     }
 }
 
-async function readRegisters() {
-    try {
-        // const res = await client.readHoldingRegisters(0, 9);  
-        const res = await client.readHoldingRegisters(20237, 2)
-        // mulai dari reg 0, length 4
-        console.log("Data:", res.buffer.swap16().readInt32LE(0));
-
-    } catch (err) {
-        console.error("❌ Read error:", err.message);
-    }
-}
 
 async function run() {
     await connect();
-
-    // Tambahkan delay setelah connect
-    await new Promise(resolve => setTimeout(resolve, 300));
-
-    setInterval(async () => {
-        if (client.isOpen) {
-            await readRegisters();
-        } else {
-            console.log("⚠ Port not open");
-        }
-    }, 1000);
+    startPolling(client, 1000, (data) => {
+        console.log(data)
+    })
 }
 
 run();
