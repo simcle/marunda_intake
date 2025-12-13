@@ -3,6 +3,8 @@
 //  Supports: 16-bit & 32-bit Mode 0 addressing 
 // ======================================================
 import ModbusRTU from "modbus-serial";
+import eventBus from "./event.js";
+
 const client = new ModbusRTU();
 
 let pollingStopper = null;
@@ -254,7 +256,7 @@ async function run() {
     // Start polling only once
     if (!pollingStopper) {
         pollingStopper = startPolling(client, 1000, (data) => {
-            console.log("📊 Data:", data);
+            eventBus('acs580', data)
         });
     }
 
@@ -269,4 +271,6 @@ async function run() {
     }
 }
 
-run();
+export async function startACS580() {
+    run();
+}

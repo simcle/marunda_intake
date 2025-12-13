@@ -1,6 +1,8 @@
 import startPoolingflow from "./flow.js";
 import startPoolingPump from "./pump.js";
 import eventBus from "./event.js";
+import { startACS580 } from "./acs580.js";
+import { startTcpServer, holdingRegisters } from "./tcpServer.js";   
 
 import mqtt from "mqtt";
 let mqttClient = null
@@ -34,10 +36,20 @@ eventBus.on('flowrate', (val) => {
     console.log('ini data darai event flow', val)
     data.flowrate = val
 })
+eventBus.on('acs580', (val) => {
+    console.log(val)
+})
 
-setInterval(() => {
-    mqttClient.publish('marunda/intake', JSON.stringify(data))
-}, 1000)
 
-startPoolingPump()
-startPoolingflow()
+async function start() {
+    await startTcpServer()
+    setInterval(() => {
+        mqttClient.publish('marunda/intake', JSON.stringify(data))
+    }, 1000)
+
+    startPoolingPump()
+    startPoolingflow()
+    startACS580()
+}
+
+start()
