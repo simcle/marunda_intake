@@ -10,7 +10,7 @@ export const coils = Buffer.alloc(100);
 export const discreteInputs = Buffer.alloc(100);
 
 // Create TCP Server
-export function startTcpServer(port = 502) {
+export function startTcpServer(port = 8502) {
     return new Promise((resolve, reject) => {
 
         const server = new net.Server();
