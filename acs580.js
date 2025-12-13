@@ -16,60 +16,60 @@ let reconnecting = false;
 // -----------------------
 const listing = [
     {
-        name: 'Motor Speed Used',
+        name: 'speed',
         num: '01.01',
         unit: 'rpm',
         type: '32bit',
         scale: 100
     },
     {
-        name: 'Output Frequency',
+        name: 'frequency',
         num: '01.06',
         unit: 'Hz',
         type: '32bit',
         scale: 100
     },
     {
-        name: 'Motor Current',
+        name: 'current',
         num: '01.07',
         unit: 'A',
         type: '32bit',
         scale: 100
     },
     {
-        name: 'Motor Torque',
+        name: 'torque',
         num: '01.10',
         unit: '%',
         type: '32bit',
         scale: 10
     },
     {
-        name: 'DC Volt',
+        name: 'dc_volt',
         num: '01.11',
         unit: 'V',
         type: '32bit',
         scale: 100
     },
     {
-        name: 'Motor Power',
+        name: 'motor_power',
         num: '01.14',
         unit: 'kW/hp',
         type: '32bit',
         scale: 100
     },
     {
-        name: 'mWh counter',
+        name: 'mWh_counter',
         num: '01.19',
         unit: 'mWh',
         type: '32bit',
         scale: 1
     },
     {
-        name: 'kWh counter',
+        name: 'kWh_counter',
         num: '01.20',
         unit: 'kWh',
         type: '32bit',
-        scale: 10
+        scale: 1
     },
 ]
 

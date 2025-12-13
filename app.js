@@ -27,8 +27,8 @@ mqttClient.on('error', () => {
 
 const data = {
     flowrate: 0,
-    pmp1: 0,
-    pmp2: 1
+    pmp1: {},
+    pmp2: {}
 }
 
 // flowrate
@@ -36,7 +36,9 @@ eventBus.on('flowrate', (val) => {
     data.flowrate = val
 })
 eventBus.on('acs580', (val) => {
-    console.log(val)
+    val.forEach(p => {
+        data.pmp1[p.name] = p.value
+    })
 })
 
 
