@@ -47,7 +47,7 @@ async function start() {
         mqttClient.publish('marunda/intake', JSON.stringify(data))
     }, 1000)
 
-    startPoolingPump()
+    // startPoolingPump()
     startPoolingflow()
     startACS580()
 }
