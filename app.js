@@ -31,6 +31,20 @@ const data = {
     pmp2: {}
 }
 
+const acs580RegisterMap = {
+    speed: { reg: 0, },
+    frequency: { reg: 2},
+    current: { reg: 4},
+    torque: {reg: 6},
+    dc_volt: {reg: 8},
+    motor_power: {reg: 10},
+    mWh_counter: {reg: 12},
+    kWh_counter: {reg: 14}
+}
+function writeInt32ToHR(register, rawValue) {
+    const offset = register * 2; // register → byte
+    holdingRegisters.writeInt32BE(rawValue, offset);
+}
 // flowrate
 eventBus.on('flowrate', (val) => {
     data.flowrate = val
@@ -38,8 +52,16 @@ eventBus.on('flowrate', (val) => {
 eventBus.on('acs580', (val) => {
     val.forEach(p => {
         data.pmp1[p.name] = p.value
+        
+        // save to modbus TCP
+        const map = acs580RegisterMap[p.name]
+        if(!map) return
+
+        writeInt32ToHR(map.reg, p.raw)
     })
 })
+
+
 
 
 async function start() {
