@@ -24,8 +24,8 @@ const connectClient = async () => {
 const pollData = async () => {
     if(!isConnected) return
     try {
-        const data = await client.readHoldingRegisters(0, 10)
-        console.log(data)
+        const res = await client.readHoldingRegisters(0, 10)
+        eventBus.emit('pmpStatus', res.data)
     } catch (error) {
         console.error("⚠️ Read error:", err.message);
         isConnected = false;
@@ -44,5 +44,5 @@ const startPoolingPump = async () => {
         await pollData();
     }, POLLING_INTERVAL_MS);
 }
-startPoolingPump()
-// export default startPoolingPump
+
+export default startPoolingPump

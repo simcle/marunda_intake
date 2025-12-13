@@ -1,5 +1,5 @@
 import startPoolingflow from "./flow.js";
-// import startPoolingPump from "./pump.js";
+import startPoolingPump from "./pump.js";
 import eventBus from "./event.js";
 import { startACS580 } from "./acs580.js";
 import { startTcpServer, holdingRegisters } from "./tcpServer.js";   
@@ -49,6 +49,13 @@ function writeInt32ToHR(register, rawValue) {
 eventBus.on('flowrate', (val) => {
     data.flowrate = val
 })
+
+// pmp status
+eventBus.on('pmpStatus', (val) => {
+    if(val) {
+        data.pmp1['pmp_run_sts'] = val[8]
+    }
+})
 eventBus.on('acs580', (val) => {
     val.forEach(p => {
         data.pmp1[p.name] = p.value
@@ -70,8 +77,8 @@ async function start() {
         mqttClient.publish('marunda/intake', JSON.stringify(data))
     }, 1000)
 
-    // startPoolingPump()
     startPoolingflow()
+    startPoolingPump()
     startACS580()
 }
 
