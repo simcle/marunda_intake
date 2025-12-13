@@ -43,8 +43,7 @@ const acs580RegisterMap = {
 }
 function writeInt32ToHR(register, rawValue) {
     const offset = register * 2; // register → byte
-    holdingRegisters.writeUInt16BE(rawValue, offset);
-    holdingRegisters.writeUInt16BE(rawValue, offset + 2);
+    holdingRegisters.writeUInt32LE(rawValue, offset);
 }
 // flowrate
 eventBus.on('flowrate', (val) => {
