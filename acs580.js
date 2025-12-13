@@ -256,7 +256,7 @@ async function run() {
     // Start polling only once
     if (!pollingStopper) {
         pollingStopper = startPolling(client, 1000, (data) => {
-            eventBus('acs580', data)
+            eventBus.emit('acs580', data)
         });
     }
 

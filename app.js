@@ -33,7 +33,6 @@ const data = {
 
 // flowrate
 eventBus.on('flowrate', (val) => {
-    console.log('ini data darai event flow', val)
     data.flowrate = val
 })
 eventBus.on('acs580', (val) => {
