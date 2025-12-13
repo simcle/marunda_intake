@@ -4,6 +4,11 @@ import Modbus from 'jsmodbus'
 // Buffer register internal (akan kita isi dari ACS580 & ACS550)
 export const holdingRegisters = Buffer.alloc(100 * 2)
 
+// Optional additional maps
+export const inputRegisters = Buffer.alloc(100 * 2);
+export const coils = Buffer.alloc(100);
+export const discreteInputs = Buffer.alloc(100);
+
 // Create TCP Server
 export function startTcpServer(port = 502) {
     return new Promise((resolve, reject) => {
