@@ -180,7 +180,7 @@ const startPolling = async (client, intervalMs = 1000, callback = console.log) =
             const data = await readAllParameters(client);
             callback(data);    // kirim hasilnya
         } catch (err) {
-            console.error("Polling error:", err.message);
+            console.error("Polling error acs580:", err.message);
         }
     }
 

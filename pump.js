@@ -38,11 +38,11 @@ const pollData = async () => {
     }
 }
 
-const startPoolingPump = async () => {
+const startPollingPump = async () => {
     await connectClient();
     setInterval(async () => {
         await pollData();
     }, POLLING_INTERVAL_MS);
 }
 
-export default startPoolingPump
+export default startPollingPump
