@@ -73,7 +73,7 @@ eventBus.on('pmpStatus', (val) => {
     if(val) {
         const pmp1 = val[8] === 1
         data.pmp1['pmp_run_sts'] = pmp1
-        writeBitToHR(7901, 0, pmp1)
+        // writeBitToHR(7901, 0, pmp1)
         
     }
 })
@@ -85,7 +85,7 @@ eventBus.on('acs580', (val) => {
         const map = acs580RegisterMap[p.name]
         if(!map) return
 
-        writeInt32ToHR(map.reg, p.raw)
+        // writeInt32ToHR(map.reg, p.raw)
     })
 })
 
