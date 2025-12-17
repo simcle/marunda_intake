@@ -126,7 +126,7 @@ const readParameter = async (client, param) => {
 
     // read registers
     const res = await client.readHoldingRegisters(info.nodeRegister, info.words);
-    console.log(res.data)
+    
     let buf = Buffer.from(res.buffer);
 
     let raw;
