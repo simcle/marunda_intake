@@ -4,6 +4,9 @@ console.log('Starting Modbus RTU test...');
 
 const client = new ModbusRTU();
 
+client.on("debug", msg => {
+    console.log("[MODBUS]", msg);
+});
 
 
 async function connect() {
@@ -19,9 +22,6 @@ async function connect() {
         client.setTimeout(1000);
 
         console.log("Connected to /dev/ttyS2");
-        client.on("debug", msg => {
-            console.log("[MODBUS]", msg);
-        });
         if (client._port) {
             client._port.on("data", d => {
                 console.log("RX RAW:", d);
