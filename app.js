@@ -32,19 +32,37 @@ const data = {
 }
 
 const acs580RegisterMap = {
-    speed: { reg: 0, },
-    frequency: { reg: 2},
-    current: { reg: 4},
-    torque: {reg: 6},
-    dc_volt: {reg: 8},
-    motor_power: {reg: 10},
-    mWh_counter: {reg: 12},
-    kWh_counter: {reg: 14}
+    speed: { reg: 8003, },
+    frequency: { reg: 8005},
+    current: { reg: 8007},
+    torque: {reg: 8009},
+    motor_power: {reg: 8011},
+    dc_volt: {reg: 8015},
+    kWh_counter: {reg: 8027},
+    mWh_counter: {reg: 8031}
 }
-function writeInt32ToHR(register, rawValue) {
-    const offset = register * 2; // register → byte
+
+function writeInt32ToHR(hrAddr, rawValue) {
+    const reg0 = hrAddr - 1
+    const offset = reg0 * 2; // register → byte
     holdingRegisters.writeInt32BE(rawValue, offset);
 }
+        
+function writeBitToHR(hrAddr, bitIndex, value) {
+  const reg0 = hrAddr - 1;      // 0-based
+  const offset = reg0 * 2;      // byte offset
+
+  let current = holdingRegisters.readUInt16BE(offset);
+
+  if (value) {
+    current |= (1 << bitIndex);   // set bit
+  } else {
+    current &= ~(1 << bitIndex);  // clear bit
+  }
+
+  holdingRegisters.writeUInt16BE(current, offset);
+}
+
 // flowrate
 eventBus.on('flowrate', (val) => {
     data.flowrate = val
@@ -53,7 +71,10 @@ eventBus.on('flowrate', (val) => {
 // pmp status
 eventBus.on('pmpStatus', (val) => {
     if(val) {
-        data.pmp1['pmp_run_sts'] = val[8]
+        const pmp1 = val[8] === 1
+        data.pmp1['pmp_run_sts'] = pmp11
+        writeBitToHR(7901, 0, pmp1)
+        
     }
 })
 eventBus.on('acs580', (val) => {
