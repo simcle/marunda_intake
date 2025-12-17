@@ -6,7 +6,7 @@ const client = new ModbusRTU();
 
 async function connect() {
     try {
-        await client.connectRTUBuffered("/dev/ttyACM0", {
+        await client.connectRTUBuffered("/dev/ttyS2", {
             baudRate: 9600,
             dataBits: 8,
             stopBits: 1,
@@ -16,7 +16,7 @@ async function connect() {
         client.setID(2);  // pastikan sesuai ACS550 param 5302
         client.setTimeout(1000);
 
-        console.log("Connected to /dev/ttyACM0");
+        console.log("Connected to /dev/ttyS2");
 
     } catch (err) {
         console.error("❌ Error connecting:", err.message);
