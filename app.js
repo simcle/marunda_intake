@@ -72,7 +72,7 @@ eventBus.on('flowrate', (val) => {
 eventBus.on('pmpStatus', (val) => {
     if(val) {
         const pmp1 = val[8] === 1
-        data.pmp1['pmp_run_sts'] = pmp11
+        data.pmp1['pmp_run_sts'] = pmp1
         writeBitToHR(7901, 0, pmp1)
         
     }
