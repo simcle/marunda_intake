@@ -4,6 +4,10 @@ console.log('Starting Modbus RTU test...');
 
 const client = new ModbusRTU();
 
+client.on("debug", msg => {
+    console.log("[MODBUS]", msg);
+});
+
 async function connect() {
     try {
         await client.connectRTUBuffered("/dev/ttyS2", {
