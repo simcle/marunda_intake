@@ -13,7 +13,7 @@ async function connect() {
             parity: "none",
         });
 
-        client.setID(1);  // pastikan sesuai ACS550 param 5302
+        client.setID(2);  // pastikan sesuai ACS550 param 5302
         client.setTimeout(1000);
 
         console.log("Connected to /dev/ttyS2");
@@ -26,7 +26,7 @@ async function connect() {
 async function readRegisters() {
     try {
         // Baca 4 register: status, speed, current, DC voltage
-        const res = await client.readHoldingRegisters(0, 4);
+        const res = await client.readHoldingRegisters(4, 1);
         console.log(res)
     } catch (err) {
         console.error("❌ Read error:", err.message);
