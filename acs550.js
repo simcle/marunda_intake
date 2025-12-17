@@ -8,6 +8,8 @@ client.on("debug", msg => {
     console.log("[MODBUS]", msg);
 });
 
+client._port.on("data", d => console.log("RX:", d));
+
 async function connect() {
     try {
         await client.connectRTUBuffered("/dev/ttyS2", {
