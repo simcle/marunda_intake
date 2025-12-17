@@ -27,7 +27,7 @@ const pollData = async () => {
         const res = await client.readHoldingRegisters(0, 10)
         eventBus.emit('pmpStatus', res.data)
     } catch (error) {
-        console.error("⚠️ Read error:", err.message);
+        console.error("⚠️ Read error:", error.message);
         isConnected = false;
         try {
             client.close(); // ensure clean state
