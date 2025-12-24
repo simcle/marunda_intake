@@ -43,7 +43,7 @@ const acs580RegisterMap = {
 }
 
 function writeInt32ToHR(hrAddr, rawValue) {
-    const reg0 = hrAddr - 1
+    const reg0 = hrAddr
     const offset = reg0 * 2; // register → byte
     holdingRegisters.writeFloatBE(rawValue, offset);
 }
