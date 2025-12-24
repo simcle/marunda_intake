@@ -25,7 +25,6 @@ const pollData = async () => {
     if(!isConnected) return
     try {
         const res = await client.readDiscreteInputs(0, 4)
-        console.log(res.data)
         eventBus.emit('pmpStatus', res.data)
     } catch (error) {
         console.error("⚠️ Read error:", error.message);
