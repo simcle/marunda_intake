@@ -49,7 +49,7 @@ function writeInt32ToHR(hrAddr, rawValue) {
 }
         
 function writeBitToHR(hrAddr, bitIndex, value) {
-  const reg0 = hrAddr - 1;      // 0-based
+  const reg0 = hrAddr;      // 0-based
   const offset = reg0 * 2;      // byte offset
 
   let current = holdingRegisters.readUInt16BE(offset);
