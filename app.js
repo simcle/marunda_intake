@@ -88,7 +88,7 @@ eventBus.on('acs580', (val) => {
         const map = acs580RegisterMap[p.name]
         if(!map) return
         console.log(p.value)
-        writeInt32ToHR(map.reg, p.raw)
+        writeInt32ToHR(map.reg, p.value)
     })
 })
 
