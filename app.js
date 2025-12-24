@@ -43,7 +43,6 @@ const acs580RegisterMap = {
 }
 
 function writeInt32ToHR(hrAddr, rawValue) {
-    console.log(rawValue)
     const reg0 = hrAddr - 1
     const offset = reg0 * 2; // register → byte
     holdingRegisters.writeFloatBE(rawValue, offset);
@@ -88,7 +87,7 @@ eventBus.on('acs580', (val) => {
         // save to modbus TCP
         const map = acs580RegisterMap[p.name]
         if(!map) return
-
+        console.log(p.value)
         writeInt32ToHR(map.reg, p.raw)
     })
 })
