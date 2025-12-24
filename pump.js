@@ -44,5 +44,5 @@ const startPollingPump = async () => {
         await pollData();
     }, POLLING_INTERVAL_MS);
 }
-
-export default startPollingPump
+startPollingPump()
+// export default startPollingPump
