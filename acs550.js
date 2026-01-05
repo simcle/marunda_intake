@@ -18,7 +18,7 @@ async function connect() {
             parity: "none",
         });
 
-        client.setID(1);  // pastikan sesuai ACS550 param 5302
+        client.setID(2);  // pastikan sesuai ACS550 param 5302
         client.setTimeout(1000);
 
         console.log("Connected to /dev/ttyS2");
