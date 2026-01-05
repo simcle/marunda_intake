@@ -2,7 +2,7 @@ import net from 'net'
 import Modbus from 'jsmodbus'
 
 // Buffer register internal (akan kita isi dari ACS580 & ACS550)
-const max_hr = 8300
+const max_hr = 8600
 export const holdingRegisters = Buffer.alloc(max_hr * 2)
 
 // Optional additional maps
