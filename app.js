@@ -77,8 +77,7 @@ eventBus.on('pmpStatus', (val) => {
         writeBitToHR(7901, 0, pmp1)
         const pmp2 = val[0] === true
         data.pmp2['pmp_run_sts'] = pmp2
-        writeInt32ToHR(7902, 0, pmp2)
-        
+        writeBitToHR(7902, 0, pmp2)   
     }
 })
 eventBus.on('acs580', (val) => {
