@@ -75,5 +75,5 @@ function milliampToFlow(mA) {
     const flow = ((mA - 4) / 16) * FLOW_MAX; // linear scale
     return flow.toFixed(2)
 }
-startPoolingflow()
+// startPoolingflow()
 export default startPoolingflow
