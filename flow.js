@@ -9,7 +9,7 @@ const BAUD_RATE = 9600;
 const SLAVE_ID = 1;
 const POLLING_INTERVAL_MS = 1000;
 const RECONNECT_DELAY_MS = 3000;
-const FLOW_MAX = 60
+const FLOW_MAX = 97
 
 let isConnected = false;
 
@@ -60,12 +60,12 @@ const startPoolingflow = async () => {
     }, POLLING_INTERVAL_MS);
 };
 
-const adcMin = 30000;
-const adcMax = 32500;
+
+const adcScale = 32767
 
 // Konversi ADC 16-bit ke mA dan flow rate
 function adcToMilliamp(adcValue) {
-    return ((adcValue - adcMin) / (adcMax - adcMin)) * 16 + 4;
+    return (adcValue / adcScale ) * 20
 }
 
 // Konversi mA ke flow rate (contoh: 4 mA = 0, 20 mA = 100 m³/h)
@@ -73,7 +73,8 @@ function milliampToFlow(mA) {
     if (mA < 4) return 0;
     if (mA > 20) mA = 20;
     const flow = ((mA - 4) / 16) * FLOW_MAX; // linear scale
-    return flow.toFixed(2)
+    const lps = (flow * 1000) / 3600
+    return lps.toFixed(2)
 }
 // startPoolingflow()
 export default startPoolingflow
