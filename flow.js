@@ -35,7 +35,7 @@ const pollData = async () => {
     try {
         const data = await client.readHoldingRegisters(0, 1);
         const val = data.data
-        // console.log(val)
+        console.log('data actual', val)
         const currMa = adcToMilliamp(val)
         // console.log('ma', currMa)
         const flow = milliampToFlow(currMa)
@@ -75,5 +75,5 @@ function milliampToFlow(mA) {
     const flow = ((mA - 4) / 16) * FLOW_MAX; // linear scale
     return flow.toFixed(2)
 }
-
+startPoolingflow()
 export default startPoolingflow
