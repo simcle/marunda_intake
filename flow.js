@@ -9,7 +9,7 @@ const BAUD_RATE = 9600;
 const SLAVE_ID = 1;
 const POLLING_INTERVAL_MS = 1000;
 const RECONNECT_DELAY_MS = 3000;
-const FLOW_MAX = 130
+const FLOW_MAX = 120
 
 let isConnected = false;
 
@@ -33,8 +33,6 @@ const connectClient = async () => {
 const pollData = async () => {
     if (!isConnected) return;
     try {
-        const test = await client.readHoldingRegisters(0, 10)
-        console.log(test)
         const data = await client.readHoldingRegisters(0, 1);
         const val = data.data
         console.log('data actual flow', val)
