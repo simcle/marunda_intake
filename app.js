@@ -66,7 +66,10 @@ function writeBitToHR(hrAddr, bitIndex, value) {
 // flowrate
 eventBus.on('flowrate', (val) => {
     data.flowrate = val
+    const toInt = val * 100
     writeInt32ToHR(8301, val)
+    writeBitToHR(8303, 0, toInt)
+    console.log(toInt)
 })
 
 // pmp status
