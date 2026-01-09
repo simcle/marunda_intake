@@ -41,6 +41,11 @@ const acs580RegisterMap = {
     kWh_counter: {reg: 8027},
     mWh_counter: {reg: 8031}
 }
+function writeInt16ToHR(hrAddr, value) {
+  const reg0 = hrAddr - 1;
+  const offset = reg0 * 2;
+  holdingRegisters.writeInt16BE(value, offset);
+}
 
 function writeInt32ToHR(hrAddr, rawValue) {
     const reg0 = hrAddr
@@ -66,9 +71,9 @@ function writeBitToHR(hrAddr, bitIndex, value) {
 // flowrate
 eventBus.on('flowrate', (val) => {
     data.flowrate = val
-    const toInt = val * 100
+    const toInt = Math.round(val * 100)
     writeInt32ToHR(8301, val)
-    writeBitToHR(8303, 0, toInt)
+    writeInt16ToHR(8303, 0, toInt)
     console.log(toInt)
 })
 
