@@ -73,6 +73,7 @@ function milliampToFlow(mA) {
     if (mA < 4) return 0;
     if (mA > 20) mA = 20;
     const flow = ((mA - 4) / 16) * FLOW_MAX; // linear scale
+    console.log('ma', flow)
     const lps = (flow * 1000) / 3600
     return lps.toFixed(2)
 }
