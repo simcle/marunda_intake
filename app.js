@@ -73,7 +73,7 @@ eventBus.on('flowrate', (val) => {
     data.flowrate = val
     const toInt = Math.round(val * 100)
     writeInt32ToHR(8301, val)
-    writeInt16ToHR(8303, 0, toInt)
+    writeInt16ToHR(8303, toInt)
     console.log(toInt)
 })
 
