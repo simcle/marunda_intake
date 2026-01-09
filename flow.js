@@ -35,7 +35,8 @@ const pollData = async () => {
     try {
         const data = await client.readHoldingRegisters(0, 1);
         const val = data.data
-        console.log('data actual flow', val)
+        const val1 = data.buffer.readInt16BE()
+        console.log('ma', val1)
         const currMa = adcToMilliamp(val)
         // console.log('ma', currMa)
         const flow = milliampToFlow(currMa)
