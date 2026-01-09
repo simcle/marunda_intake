@@ -66,7 +66,7 @@ function writeBitToHR(hrAddr, bitIndex, value) {
 // flowrate
 eventBus.on('flowrate', (val) => {
     data.flowrate = val
-    writeInt32ToHR(8301, val)
+    writeInt32ToHR(8301, 12.34)
     console.log(val)
 })
 
