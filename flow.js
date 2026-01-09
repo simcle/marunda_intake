@@ -34,7 +34,7 @@ const pollData = async () => {
     if (!isConnected) return;
     try {
         const test = await client.readInputRegisters(0, 4)
-        console.log(test)
+        console.log('hallo', test)
         const data = await client.readHoldingRegisters(0, 1);
         const val = data.data
         const currMa = adcToMilliamp(val)
