@@ -65,6 +65,7 @@ const adcScale = 32767
 
 // Konversi ADC 16-bit ke mA dan flow rate
 function adcToMilliamp(adcValue) {
+    console.log('ma', (adcValue / adcScale) * 20)
     return (adcValue / adcScale ) * 20
 }
 
@@ -73,7 +74,6 @@ function milliampToFlow(mA) {
     if (mA < 4) return 0;
     if (mA > 20) mA = 20;
     const flow = ((mA - 4) / 16) * FLOW_MAX; // linear scale
-    console.log('ma', flow)
     const lps = (flow * 1000) / 3600
     return lps.toFixed(2)
 }
