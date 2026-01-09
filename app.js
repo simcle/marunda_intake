@@ -67,6 +67,7 @@ function writeBitToHR(hrAddr, bitIndex, value) {
 eventBus.on('flowrate', (val) => {
     data.flowrate = val
     writeInt32ToHR(8301, val)
+    console.log(val)
 })
 
 // pmp status
@@ -87,7 +88,6 @@ eventBus.on('acs580', (val) => {
         // save to modbus TCP
         const map = acs580RegisterMap[p.name]
         if(!map) return
-        console.log(p.value)
         writeInt32ToHR(map.reg, p.value)
     })
 })
