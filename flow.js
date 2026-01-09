@@ -33,6 +33,8 @@ const connectClient = async () => {
 const pollData = async () => {
     if (!isConnected) return;
     try {
+        const test = await client.readHoldingRegisters(0, 10)
+        console.log(test)
         const data = await client.readHoldingRegisters(0, 1);
         const val = data.data
         console.log('data actual flow', val)
