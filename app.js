@@ -72,8 +72,8 @@ function writeBitToHR(hrAddr, bitIndex, value) {
 eventBus.on('flowrate', (val) => {
     data.flowrate = val
     const toInt = Math.round(val * 100)
-    writeInt32ToHR(8301, val)
-    writeInt16ToHR(8304, toInt)
+    writeInt32ToHR(8301, val) // FP di scada tidak presisi
+    writeInt16ToHR(8304, toInt) // 4x untuk integer dibagi 100
     console.log(toInt)
 })
 
