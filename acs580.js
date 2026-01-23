@@ -71,6 +71,13 @@ const listing = [
         type: '32bit',
         scale: 1
     },
+    {
+        name: 'running_time',
+        num: '05.03',
+        unit: 'h',
+        type: '32bit',
+        scale: 10
+    }
 ]
 
 // -----------------------
