@@ -96,7 +96,7 @@ eventBus.on('acs580', (val) => {
         const map = acs580RegisterMap[p.name]
         if(!map) return
         if(p.name === 'running_time') {
-            const hours = Math.floor(p.value * 100)
+            const hours = Math.floor(p.value )
             console.log('hours', p.value, hours)
             writeInt16ToHR(8025, hours)
         } else {
