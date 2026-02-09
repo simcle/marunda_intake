@@ -90,16 +90,16 @@ eventBus.on('pmpStatus', (val) => {
 })
 eventBus.on('acs580', (val) => {
     val.forEach(p => {
-        data.pmp1[p.name] = p.value
         
         // save to modbus TCP
         const map = acs580RegisterMap[p.name]
         if(!map) return
         if(p.name === 'running_time') {
             const hours = Math.floor(p.value )
-            console.log('hours', p.value, hours)
+            data.pmp1[p.name] = hours
             writeInt16ToHR(8025, hours)
         } else {
+            data.pmp1[p.name] = p.value
             writeInt32ToHR(map.reg, p.value)
         }
     })
