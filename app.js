@@ -95,7 +95,12 @@ eventBus.on('acs580', (val) => {
         // save to modbus TCP
         const map = acs580RegisterMap[p.name]
         if(!map) return
-        writeInt32ToHR(map.reg, p.value)
+        if(p.name === 'running_time') {
+            const hours = Math.floor(p.value / 3600)
+            writeInt32ToHR(8025, hours)
+        } else {
+            writeInt32ToHR(map.reg, p.value)
+        }
     })
 })
 
