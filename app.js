@@ -38,6 +38,7 @@ const acs580RegisterMap = {
     torque: {reg: 8009},
     motor_power: {reg: 8011},
     dc_volt: {reg: 8015},
+    running_time: {reg: 8025},
     kWh_counter: {reg: 8027},
     mWh_counter: {reg: 8031}
 }
