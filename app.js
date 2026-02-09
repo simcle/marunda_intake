@@ -98,7 +98,7 @@ eventBus.on('acs580', (val) => {
         if(p.name === 'running_time') {
             const hours = Math.floor(p.value )
             console.log('hours', p.value, hours)
-            writeInt16ToHR(8026, hours)
+            writeInt16ToHR(8025, hours)
         } else {
             writeInt32ToHR(map.reg, p.value)
         }
