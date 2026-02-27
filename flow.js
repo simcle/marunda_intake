@@ -81,7 +81,7 @@ function milliampToFlow(mA) {
 
     const flowM3h = ((mA - 4) * FLOW_MAX_M3H) / 16;
     const lps = flowM3h * (1000 / 3600);
-
+    console.log('flow ls: ', lps)
     return Number(lps.toFixed(2));
 }
 // startPoolingflow()
