@@ -80,6 +80,7 @@ function milliampToFlow(mA) {
     if (mA >= 20) mA = 20;
 
     const flowLps = ((mA - 4) * QMAX_LPS) / 16;
+    console.log('flow lps: ',flowLps)
     return flowLps.toFixed(2)
 }
 // startPoolingflow()
