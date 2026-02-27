@@ -80,6 +80,7 @@ function milliampToFlow(mA) {
     if (mA > 20) mA = 20;
     const flow = ((mA - 4) / 16) * FLOW_MAX; // linear scale
     const lps = (flow * 1000) / 3600
+    console.log('flow ls:', lps)
     return lps.toFixed(2)
 }
 // startPoolingflow()
