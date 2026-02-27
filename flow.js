@@ -66,7 +66,7 @@ const ADC_4MA  = 31004;
 const ADC_20MA = 35020;
 const SPAN = ADC_20MA - ADC_4MA; // 4016
 
-function adcToMilliamp(adcValue) {
+function adcToMilliamp(raw) {
     if (raw <= ADC_4MA) return 4;
     if (raw >= ADC_20MA) return 20;
 
