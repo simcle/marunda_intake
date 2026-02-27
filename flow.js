@@ -10,6 +10,7 @@ const SLAVE_ID = 1;
 const POLLING_INTERVAL_MS = 1000;
 const RECONNECT_DELAY_MS = 3000;
 
+
 let isConnected = false;
 
 const connectClient = async () => {
@@ -73,15 +74,16 @@ function adcToMilliamp(raw) {
     return Number(mA.toFixed(2));
 }
 
-
-const QMAX_LPS = 500
+// Konversi mA ke flow rate (contoh: 4 mA = 0, 20 mA = 100 m³/h)
+const FLOW_MAX_M3H = 1700
 function milliampToFlow(mA) {
     if (mA <= 4) return 0;
     if (mA >= 20) mA = 20;
 
-    const flowLps = ((mA - 4) * QMAX_LPS) / 16;
-    console.log('flow lps: ',flowLps)
-    return flowLps.toFixed(2)
+    const flowM3h = ((mA - 4) * FLOW_MAX_M3H) / 16;
+    const lps = flowM3h * (1000 / 3600);
+    console.log('flow ls: ', lps)
+    return lps.toFixed(2);
 }
 // startPoolingflow()
 export default startPoolingflow
