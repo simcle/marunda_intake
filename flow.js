@@ -9,7 +9,7 @@ const BAUD_RATE = 9600;
 const SLAVE_ID = 1;
 const POLLING_INTERVAL_MS = 1000;
 const RECONNECT_DELAY_MS = 3000;
-const FLOW_MAX = 1368
+const FLOW_MAX_M3H = 1368
 
 let isConnected = false;
 
@@ -76,12 +76,13 @@ function adcToMilliamp(raw) {
 
 // Konversi mA ke flow rate (contoh: 4 mA = 0, 20 mA = 100 m³/h)
 function milliampToFlow(mA) {
-    if (mA < 4) return 0;
-    if (mA > 20) mA = 20;
-    const flow = ((mA - 4)) * FLOW_MAX / 16; // linear scale
-    const lps = (flow * 1000) / 3600
-    console.log('flow ls:', lps)
-    return lps.toFixed(2)
+    if (mA <= 4) return 0;
+    if (mA >= 20) mA = 20;
+
+    const flowM3h = ((mA - 4) * FLOW_MAX_M3H) / 16;
+    const lps = flowM3h * (1000 / 3600);
+
+    return Number(lps.toFixed(2));
 }
 // startPoolingflow()
 export default startPoolingflow
