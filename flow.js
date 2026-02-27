@@ -74,7 +74,7 @@ function adcToMilliamp(raw) {
 }
 
 
-const QMAX_LPS = 532
+const QMAX_LPS = 500
 function milliampToFlow(mA) {
     if (mA <= 4) return 0;
     if (mA >= 20) mA = 20;
