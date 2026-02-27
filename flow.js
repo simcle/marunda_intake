@@ -9,7 +9,7 @@ const BAUD_RATE = 9600;
 const SLAVE_ID = 1;
 const POLLING_INTERVAL_MS = 1000;
 const RECONNECT_DELAY_MS = 3000;
-const FLOW_MAX_M3H = 1450
+const FLOW_MAX_M3H = 2000
 
 let isConnected = false;
 
