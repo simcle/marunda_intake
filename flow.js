@@ -64,6 +64,7 @@ const adcScale = 32767
 
 // Konversi ADC 16-bit ke mA dan flow rate
 function adcToMilliamp(adcValue) {
+    console.log('adc', adcValue)
     console.log('ma', (adcValue / adcScale) * 20)
     return (adcValue / adcScale ) * 20
 }
