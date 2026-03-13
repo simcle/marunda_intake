@@ -75,7 +75,7 @@ function adcToMilliamp(raw) {
 }
 
 // Konversi mA ke flow rate (contoh: 4 mA = 0, 20 mA = 100 m³/h)
-const FLOW_MAX_M3H = 1700
+const FLOW_MAX_M3H = 1750
 function milliampToFlow(mA) {
     if (mA <= 4) return 0;
     if (mA >= 20) mA = 20;
