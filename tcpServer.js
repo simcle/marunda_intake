@@ -30,7 +30,15 @@ export function startTcpServer(port = 8502) {
         });
 
         modbusServer.on("connection", (client) => {
-            console.log("🔌 Client connected:", client.remoteAddress);
+            const socket = client._socket || client.socket;
+
+            socket.on("error", (err) => {
+                console.warn("⚠️ Socket error:", err.code);
+            });
+
+            socket.on("close", () => {
+                console.log("🔌 Client disconnected");
+            });
         });
 
         modbusServer.on("error", (err) => {
