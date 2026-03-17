@@ -67,9 +67,9 @@ const ADC_20MA = 35020;
 const SPAN = ADC_20MA - ADC_4MA; // 4016
 
 function adcToMilliamp(raw) {
-    console.log('raw ADC:',raw)
-
-    const mA = 4 + ((raw - ADC_4MA) * 16) / SPAN;
+    
+    const mA = 4 + ((raw.toFixed(3) - ADC_4MA) * 16) / SPAN;
+    console.log('raw ADC:',raw.toFixed(3))
     console.log('current mA:', mA)
     return Number(mA.toFixed(2));
 }
