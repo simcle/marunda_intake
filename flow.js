@@ -62,7 +62,7 @@ const startPoolingflow = async () => {
 
 
 // Konversi ADC 16-bit ke mA dan flow rate
-const ADC_4MA  = 31004;
+const ADC_4MA  = 31005;
 const ADC_20MA = 35020;
 const SPAN = ADC_20MA - ADC_4MA; // 4016
 
